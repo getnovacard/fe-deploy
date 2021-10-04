@@ -2,10 +2,10 @@
 
 {% block content %}
         {% if request.user.is_authenticated %}
-<div id="edit-profile-app" xmlns:v-on="http://www.w3.org/1999/xhtml">
+                <div id="edit-profile-app" xmlns:v-on="http://www.w3.org/1999/xhtml">
                         <h1 class="title">Edit profile {{ user_profile.username }}</h1>
 
-                        <div v-on:submit="validateForm" method="post" action="." enctype="multipart/form-data" id="">
+                        <form v-on:submit="validateForm" method="post" action="." enctype="multipart/form-data" id="">
                                 {% csrf_token %}
 
                                 <!-- Error notifications -->
@@ -380,6 +380,7 @@
                                 </div>
                         </form>
                 </div>
+
         {% endif %}
 {% endblock %}
 
