@@ -2,10 +2,5 @@
 
 {% block content %}
     <h1 class="subtitle has-text-centered">Nova Card Testing App</h1>
-
-    {% if request.user.is_authenticated %}
-        <a href="{% url 'profiles_list' %}" class="button is-success">Update profiles</a>
-    {% endif %}
-
 {% endblock %}
 
