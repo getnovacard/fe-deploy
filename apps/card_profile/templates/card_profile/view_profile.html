@@ -8,7 +8,7 @@
                 <b>Description: </b>{{ user_profile.description }}<br>
                 <b>Base URL: </b>{{ user_profile.baseurl }}<br>
                 <b>URL: </b>{{ user_profile.url }}<br>
-                        {% if user_profile.avatar %}
+                {% if user_profile.avatar %}
                         <b>Avatar: </b>{{ user_profile.avatar }}<br><br>
                         <img src="/media/{{ user_profile.avatar }}" alt="Avatar" width="200" height="200">
                 {% endif %}<br><br>

@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'apps.core',
     'apps.card_profile',
     'fontawesomefree',
+    'debug_toolbar'
 ]
 
 MIDDLEWARE = [
@@ -39,6 +40,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'project.urls'
@@ -114,3 +116,9 @@ MEDIA_URL='/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# for debug toolbar
+INTERNAL_IPS = [
+    '127.0.0.1',
+    '192.168.100.126', 
+]

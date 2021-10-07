@@ -2,6 +2,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Card_profile
 from .forms import EditProfile
+from modules.core import create_update_task
+
+import json
 
 
 @login_required
@@ -27,6 +30,8 @@ def edit_profile(request, username):
 
         if form.is_valid():
             form.save()
+
+            create_update_task(user_profile, form)
 
             return redirect('view_profile', username=user_profile.username)
 
