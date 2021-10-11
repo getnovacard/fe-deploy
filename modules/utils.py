@@ -1,6 +1,9 @@
 import os
 import random
 import string
+import logging
+
+logger =logging.getLogger('novacard_info')
 
 
 def create_directory(directory):
@@ -8,13 +11,14 @@ def create_directory(directory):
 
     if not check_dir:
         os.makedirs(directory)
-        print("created folder : ", directory)
+        logger.info(f"---> created directory {directory}")
     else:
-        print(directory, "folder already exists.")
+        logger.info(f"---> {directory} already exists")
 
 
 def get_random_string(length):
     source = string.ascii_letters + string.digits
     result_str = ''.join((random.choice(source) for i in range(length)))
+    logger.info(f"---> generating random string for profile update directory {result_str}")
     
     return result_str

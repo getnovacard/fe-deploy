@@ -34,11 +34,7 @@
                 {% if user_profile.github_url %}<b>Github URL: </b>{{ user_profile.github_url }}<br>{% endif %}
                 {% if user_profile.gitlab_url %}<b>Gitlab URL: </b>{{ user_profile.gitlab_url }}<br>{% endif %}
                 <b>Markdown: </b>{{ user_profile.markdown }}<br>
-
-                <p><a href="{{ profile.url }}">{{ profile.username }}</a></p>
-
                 <br>
-
                 <a href="{% url 'edit_profile' user_profile.username %}" class="button is-success">Edit profile</a>
         {% endif %}
 {% endblock %}

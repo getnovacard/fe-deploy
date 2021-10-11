@@ -1,22 +1,30 @@
 import json
 import shutil
 import os
+from project.settings import TASKS_DIR
 from .utils import create_directory, get_random_string
+import logging
+
+logger =logging.getLogger('novacard_info')
 
 
 def create_update_task(user_profile, form_instance):
 
-    tasks_directory = "tasks"
+    logger.info(f"---> attempting creation of main tasks directory")
+    tasks_directory = TASKS_DIR
     create_directory(tasks_directory)
 
-    individual_task_directory = f"{tasks_directory}/task_{get_random_string(10)}"    
+    logger.info(f"---> creating update task directory for user {user_profile.username}")
+    individual_task_directory = f"{tasks_directory}task_{get_random_string(10)}"    
     create_directory(individual_task_directory)
 
+    logger.info(f"---> checking if new avatar image was uploaded in order to set the 'update_avatar' variable")
     try:
         avatar_image_exists = form_instance.files['avatar']
         update_avatar = "1"
     except:
         update_avatar = "0"
+    logger.info(f"---> update_avatar = {update_avatar}")
 
     avatar_file_name = user_profile.avatar.path.split("/")[-1]
     avatar_file_path = f"media/{str(user_profile.avatar)}"
@@ -24,9 +32,12 @@ def create_update_task(user_profile, form_instance):
     task_avatar_filename = f"avatar{avatar_file_extension}"
 
     if update_avatar == "1":
+        logger.info(f"---> avatar_filename = {avatar_file_name}; avatar_file_path = {avatar_file_path}; avatar_file_extension = {avatar_file_extension}; task_avatar_filename = {task_avatar_filename}")
+        logger.info(f"---> copying avatar image for user {user_profile.username} to temporary task directory")
         task_avatar_file_path =f"{individual_task_directory}/{task_avatar_filename}"
         shutil.copyfile(avatar_file_path, task_avatar_file_path)
 
+    logger.info(f"---> creating 'operations_dict' for user {user_profile.username}")
     operations_dict = {
         "username": user_profile.username,
         "repository": user_profile.repository_name,
@@ -66,3 +77,5 @@ def create_update_task(user_profile, form_instance):
     with open(operations_file, "w") as f:
         json.dump(operations_dict, f)
 
+    logger.info(f"---> update task directory for user {user_profile.username} created successfully")
+    return individual_task_directory

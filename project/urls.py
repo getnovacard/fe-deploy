@@ -6,7 +6,6 @@ from apps.core.views import frontpage
 from django.conf import settings
 from django.conf.urls.static import static
 
-import debug_toolbar
 
 urlpatterns = [
     path('', frontpage, name='frontpage'),
@@ -14,5 +13,4 @@ urlpatterns = [
     path('login/', views.LoginView.as_view(template_name='core/login.html'), name='login'),
     path('admin/', admin.site.urls),
     path('card_profiles/', include('apps.card_profile.urls')),
-    path('__debug__/', include(debug_toolbar.urls)),
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
